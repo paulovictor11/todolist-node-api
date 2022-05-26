@@ -6,10 +6,10 @@ interface IUserProps {
 
 export class User {
     private props: IUserProps;
-    private _id: number;
+    private _id?: number;
 
-    get id(): number {
-        return this._id;
+    get id(): number | null {
+        return this._id ?? null;
     }
 
     get name(): string {
@@ -24,7 +24,7 @@ export class User {
         return this.props.password;
     }
 
-    constructor(props: IUserProps, id: number) {
+    constructor(props: IUserProps, id?: number) {
         this.props = props;
         this._id = id;
     }
