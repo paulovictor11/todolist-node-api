@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { LoginController } from "./app/controllers/auth/login.controller";
 import { CreateUserController } from "./app/controllers/user/create.controller";
+import { DeleteUserController } from "./app/controllers/user/delete.controller";
 import { FindUserByIdController } from "./app/controllers/user/find-by-id.controller";
 import { ListAllUserscontroller } from "./app/controllers/user/list-all.controller";
 import { UpdateUserController } from "./app/controllers/user/update.controller";
@@ -19,7 +20,8 @@ routes
 routes
     .route("/user/:id")
     .get(new FindUserByIdController().handle)
-    .put(new UpdateUserController().handle);
+    .put(new UpdateUserController().handle)
+    .delete(new DeleteUserController().handle);
 
 // ! Project routes
 
