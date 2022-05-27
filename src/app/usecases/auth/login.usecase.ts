@@ -41,7 +41,7 @@ export class LoginUsecase {
             throw new Unathorized();
         }
 
-        const token = await this.tokenGenerator.generate(user.id);
+        const token = await this.tokenGenerator.generate(user.id!);
         return {
             user,
             token,
