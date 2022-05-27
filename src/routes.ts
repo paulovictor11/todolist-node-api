@@ -3,6 +3,7 @@ import { LoginController } from "./app/controllers/auth/login.controller";
 import { CreateProjectController } from "./app/controllers/project/create.controller";
 import { FindProjectByIdController } from "./app/controllers/project/find-by-id.controller";
 import { ListAllProjectsController } from "./app/controllers/project/list-all.controller";
+import { UpdateProjectController } from "./app/controllers/project/update.controller";
 import { CreateUserController } from "./app/controllers/user/create.controller";
 import { DeleteUserController } from "./app/controllers/user/delete.controller";
 import { FindUserByIdController } from "./app/controllers/user/find-by-id.controller";
@@ -32,6 +33,9 @@ routes
     .get(new ListAllProjectsController().handle)
     .post(new CreateProjectController().handle);
 
-routes.route("/project/:id").get(new FindProjectByIdController().handle);
+routes
+    .route("/project/:id")
+    .get(new FindProjectByIdController().handle)
+    .put(new UpdateProjectController().handle);
 
 // ! Task routes
