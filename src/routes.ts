@@ -6,6 +6,7 @@ import { FindProjectByIdController } from "./app/controllers/project/find-by-id.
 import { ListAllProjectsController } from "./app/controllers/project/list-all.controller";
 import { UpdateProjectController } from "./app/controllers/project/update.controller";
 import { CreateTaskController } from "./app/controllers/task/create.controller";
+import { DeleteTaskController } from "./app/controllers/task/delete.controller";
 import { FindTaskByIdController } from "./app/controllers/task/find-by-id.controller";
 import { ListAllTasksController } from "./app/controllers/task/list-all.controller";
 import { UpdateTaskController } from "./app/controllers/task/update.controller";
@@ -53,4 +54,5 @@ routes
 routes
     .route("/task/:id")
     .get(new FindTaskByIdController().handle)
-    .put(new UpdateTaskController().handle);
+    .put(new UpdateTaskController().handle)
+    .delete(new DeleteTaskController().handle);
