@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaUserRepository } from "../../../infra/database/prisma/repositories/prisma-user-repository";
+import { HttpResponse } from "../../presentation/helpers/http-response";
 import { IControllerRepository } from "../../repositories/domain/controller-repository";
 import { DeleteUserUsecase } from "../../usecases/user/delete.usecase";
 
@@ -14,11 +15,9 @@ export class DeleteUserController implements IControllerRepository {
             );
 
             await deleteUserController.execute(Number(id));
-            return response.send();
+            return new HttpResponse(response).ok();
         } catch (err: any) {
-            return response.status(400).json({
-                message: err.message ?? "Unexpected Error",
-            });
+            return new HttpResponse(response).badRequest(err.message);
         }
     }
 }

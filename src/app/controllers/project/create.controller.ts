@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaProjectRepository } from "../../../infra/database/prisma/repositories/prisma-project-repository";
+import { HttpResponse } from "../../presentation/helpers/http-response";
 import { IControllerRepository } from "../../repositories/domain/controller-repository";
 import { CreateProjectUsecase } from "../../usecases/project/create.usecase";
 
@@ -14,11 +15,9 @@ export class CreateProjectController implements IControllerRepository {
             );
 
             await createProjectUsecase.execute({ title, description, userId });
-            return response.status(201).send();
+            return new HttpResponse(response).created();
         } catch (err: any) {
-            return response.status(400).json({
-                message: err.message ?? "Unexpected Error",
-            });
+            return new HttpResponse(response).badRequest(err.message);
         }
     }
 }

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaProjectRepository } from "../../../infra/database/prisma/repositories/prisma-project-repository";
+import { HttpResponse } from "../../presentation/helpers/http-response";
 import { IControllerRepository } from "../../repositories/domain/controller-repository";
 import { ListAllProjectsUsecase } from "../../usecases/project/list-all.usecase";
 
@@ -12,11 +13,9 @@ export class ListAllProjectsController implements IControllerRepository {
             );
 
             const projects = await listAllProjectsUsecase.execute();
-            return response.send(projects);
+            return new HttpResponse(response).ok(projects);
         } catch (err: any) {
-            return response.status(400).json({
-                message: err.message ?? "Unexpected Error",
-            });
+            return new HttpResponse(response).badRequest(err.message);
         }
     }
 }

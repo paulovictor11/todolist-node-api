@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaUserRepository } from "../../../infra/database/prisma/repositories/prisma-user-repository";
+import { HttpResponse } from "../../presentation/helpers/http-response";
 import { IControllerRepository } from "../../repositories/domain/controller-repository";
 import { ListAllUsersUsecase } from "../../usecases/user/list-all.usecase";
 
@@ -12,11 +13,9 @@ export class ListAllUserscontroller implements IControllerRepository {
             );
 
             const users = await listAllUsersUsecase.execute();
-            return response.send(users);
+            return new HttpResponse(response).ok(users);
         } catch (err: any) {
-            return response.status(400).json({
-                message: err.message ?? "Unexpected Error",
-            });
+            return new HttpResponse(response).badRequest(err.message);
         }
     }
 }

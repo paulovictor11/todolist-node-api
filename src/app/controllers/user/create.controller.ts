@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaUserRepository } from "../../../infra/database/prisma/repositories/prisma-user-repository";
+import { HttpResponse } from "../../presentation/helpers/http-response";
 import { IControllerRepository } from "../../repositories/domain/controller-repository";
 import { CreateUserUsecase } from "../../usecases/user/create.usecase";
 import { EmailValidator } from "../../utils/helpers/email-validator";
@@ -21,11 +22,9 @@ export class CreateUserController implements IControllerRepository {
 
             await createUserUsecase.execute({ name, email, password });
 
-            return response.status(201).send();
+            return new HttpResponse(response).created();
         } catch (err: any) {
-            return response.status(400).json({
-                message: err.message ?? "Unexpected Error",
-            });
+            return new HttpResponse(response).badRequest(err.message);
         }
     }
 }

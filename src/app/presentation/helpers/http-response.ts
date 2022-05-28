@@ -1,29 +1,33 @@
-import { response } from "express";
+import { Response } from "express";
 import { ServerError } from "../errors/server-error";
 import { Unathorized } from "../errors/unathorized";
 
 export class HttpResponse {
-    static serverError() {
-        return response.status(500).json({
+    constructor(private response: Response) {}
+
+    serverError() {
+        return this.response.status(500).json({
             message: new ServerError(),
         });
     }
 
-    static unathorized() {
-        return response.status(401).json({
+    unathorized() {
+        return this.response.status(401).json({
             message: new Unathorized(),
         });
     }
 
-    static badRequest(message: string) {
-        return response.status(400).json({ message });
+    badRequest(message?: string) {
+        return this.response.status(400).json({
+            message: message ?? "Unexpected Error",
+        });
     }
 
-    static created() {
-        return response.sendStatus(201);
+    created() {
+        return this.response.sendStatus(201);
     }
 
-    static ok(data?: any) {
-        return response.send(data);
+    ok(data?: any) {
+        return this.response.send(data);
     }
 }

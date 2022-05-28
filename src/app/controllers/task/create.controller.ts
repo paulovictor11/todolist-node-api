@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaTaskRepository } from "../../../infra/database/prisma/repositories/prisma-task-repository";
+import { HttpResponse } from "../../presentation/helpers/http-response";
 import { IControllerRepository } from "../../repositories/domain/controller-repository";
 import { CreateTaskUsecase } from "../../usecases/task/create.usecase";
 
@@ -14,11 +15,9 @@ export class CreateTaskController implements IControllerRepository {
             );
 
             await createTaskUsecase.execute({ title, projectId, assignedTo });
-            return response.status(201).send();
+            return new HttpResponse(response).created();
         } catch (err: any) {
-            return response.status(400).json({
-                message: err.message ?? "Unexpected Error",
-            });
+            return new HttpResponse(response).badRequest(err.message);
         }
     }
 }
