@@ -5,6 +5,7 @@ import { DeleteProjectController } from "./app/controllers/project/delete.contro
 import { FindProjectByIdController } from "./app/controllers/project/find-by-id.controller";
 import { ListAllProjectsController } from "./app/controllers/project/list-all.controller";
 import { UpdateProjectController } from "./app/controllers/project/update.controller";
+import { ListAllTasksController } from "./app/controllers/task/list-all.controller";
 import { CreateUserController } from "./app/controllers/user/create.controller";
 import { DeleteUserController } from "./app/controllers/user/delete.controller";
 import { FindUserByIdController } from "./app/controllers/user/find-by-id.controller";
@@ -41,3 +42,4 @@ routes
     .delete(new DeleteProjectController().handle);
 
 // ! Task routes
+routes.route("/tasks").get(new ListAllTasksController().handle);

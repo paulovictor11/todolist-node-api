@@ -2,7 +2,7 @@ import { Task } from "./task";
 
 interface IProjectProps {
     title: string;
-    description?: string;
+    description: string | null;
     userId: number;
     tasks?: Task[];
 }
@@ -20,7 +20,7 @@ export class Project {
     }
 
     get description(): string | null {
-        return this.props.description ?? null;
+        return this.props.description;
     }
 
     get userId(): number {
