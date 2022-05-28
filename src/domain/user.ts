@@ -1,15 +1,15 @@
 interface IUserProps {
+    id?: number;
     name: string;
     email: string;
     password: string;
 }
 
 export class User {
-    private props: IUserProps;
-    private _id?: number;
+    constructor(private props: IUserProps) {}
 
     get id(): number | null {
-        return this._id ?? null;
+        return this.props.id ?? null;
     }
 
     get name(): string {
@@ -22,10 +22,5 @@ export class User {
 
     get password(): string {
         return this.props.password;
-    }
-
-    constructor(props: IUserProps, id?: number) {
-        this.props = props;
-        this._id = id;
     }
 }

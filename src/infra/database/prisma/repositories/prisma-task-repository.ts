@@ -21,15 +21,13 @@ export class PrismaTaskRepository implements ITaskRepository {
             return null;
         }
 
-        return new Task(
-            {
-                title: task.title,
-                projectId: task.projectId,
-                assignedTo: task.assignedTo,
-                completed: task.completed,
-            },
-            task.id
-        );
+        return new Task({
+            id: task.id,
+            title: task.title,
+            projectId: task.projectId,
+            assignedTo: task.assignedTo,
+            completed: task.completed,
+        });
     }
 
     async findById(id: number): Promise<Task | null> {
@@ -41,15 +39,13 @@ export class PrismaTaskRepository implements ITaskRepository {
             return null;
         }
 
-        return new Task(
-            {
-                title: task.title,
-                projectId: task.projectId,
-                assignedTo: task.assignedTo,
-                completed: task.completed,
-            },
-            task.id
-        );
+        return new Task({
+            id: task.id,
+            title: task.title,
+            projectId: task.projectId,
+            assignedTo: task.assignedTo,
+            completed: task.completed,
+        });
     }
 
     async listAll(): Promise<Task[]> {
@@ -60,15 +56,13 @@ export class PrismaTaskRepository implements ITaskRepository {
         });
         return tasks.map(
             (task) =>
-                new Task(
-                    {
-                        title: task.title,
-                        projectId: task.projectId,
-                        assignedTo: task.assignedTo,
-                        completed: task.completed,
-                    },
-                    task.id
-                )
+                new Task({
+                    id: task.id,
+                    title: task.title,
+                    projectId: task.projectId,
+                    assignedTo: task.assignedTo,
+                    completed: task.completed,
+                })
         );
     }
 

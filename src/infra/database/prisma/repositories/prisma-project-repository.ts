@@ -18,26 +18,22 @@ export class PrismaProjectRepository implements IProjectRepository {
 
         const tasks = project.Task.map(
             (task) =>
-                new Task(
-                    {
-                        title: task.title,
-                        projectId: task.projectId,
-                        assignedTo: task.assignedTo,
-                        completed: task.completed,
-                    },
-                    task.id
-                )
+                new Task({
+                    id: task.id,
+                    title: task.title,
+                    projectId: task.projectId,
+                    assignedTo: task.assignedTo,
+                    completed: task.completed,
+                })
         );
 
-        return new Project(
-            {
-                title: project.title,
-                description: project.description,
-                userId: project.userId,
-                tasks,
-            },
-            project.id
-        );
+        return new Project({
+            id: project.id,
+            title: project.title,
+            description: project.description,
+            userId: project.userId,
+            tasks,
+        });
     }
 
     async findById(id: number): Promise<Project | null> {
@@ -54,26 +50,22 @@ export class PrismaProjectRepository implements IProjectRepository {
 
         const tasks = project.Task.map(
             (task) =>
-                new Task(
-                    {
-                        title: task.title,
-                        projectId: task.projectId,
-                        assignedTo: task.assignedTo,
-                        completed: task.completed,
-                    },
-                    task.id
-                )
+                new Task({
+                    id: task.id,
+                    title: task.title,
+                    projectId: task.projectId,
+                    assignedTo: task.assignedTo,
+                    completed: task.completed,
+                })
         );
 
-        return new Project(
-            {
-                title: project.title,
-                description: project.description,
-                userId: project.userId,
-                tasks,
-            },
-            project.id
-        );
+        return new Project({
+            id: project.id,
+            title: project.title,
+            description: project.description,
+            userId: project.userId,
+            tasks,
+        });
     }
 
     async listAll(): Promise<Project[]> {
@@ -85,14 +77,12 @@ export class PrismaProjectRepository implements IProjectRepository {
 
         return projects.map(
             (project) =>
-                new Project(
-                    {
-                        title: project.title,
-                        description: project.description,
-                        userId: project.userId,
-                    },
-                    project.id
-                )
+                new Project({
+                    id: project.id,
+                    title: project.title,
+                    description: project.description,
+                    userId: project.userId,
+                })
         );
     }
 

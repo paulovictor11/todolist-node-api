@@ -25,7 +25,7 @@ export class UpdateTaskUsecase {
             throw new NotFoundError("task");
         }
 
-        const task = new Task({ title, projectId, assignedTo }, id);
+        const task = new Task({ id, title, projectId, assignedTo });
         await this.taskRepository.update(task, id);
     }
 }

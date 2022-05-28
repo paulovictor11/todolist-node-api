@@ -1,18 +1,18 @@
 import { Task } from "./task";
 
 interface IProjectProps {
+    id?: number;
     title: string;
-    description: string | null;
+    description?: string;
     userId: number;
     tasks?: Task[];
 }
 
 export class Project {
-    private props: IProjectProps;
-    private _id?: number;
+    constructor(private props: IProjectProps) {}
 
     get id(): number | null {
-        return this._id ?? null;
+        return this.props.id ?? null;
     }
 
     get title(): string {
@@ -20,7 +20,7 @@ export class Project {
     }
 
     get description(): string | null {
-        return this.props.description;
+        return this.props.description ?? null;
     }
 
     get userId(): number {
@@ -29,10 +29,5 @@ export class Project {
 
     get tasks(): Task[] {
         return this.props.tasks ?? [];
-    }
-
-    constructor(props: IProjectProps, id?: number) {
-        this.props = props;
-        this._id = id;
     }
 }

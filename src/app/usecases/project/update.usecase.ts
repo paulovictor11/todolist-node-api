@@ -25,7 +25,7 @@ export class UpdateProjectUsecase {
             throw new NotFoundError("project");
         }
 
-        const project = new Project({ title, description, userId }, id);
+        const project = new Project({ id, title, description, userId });
         await this.projectRepository.update(project, id);
     }
 }

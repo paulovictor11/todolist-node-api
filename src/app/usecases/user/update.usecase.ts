@@ -24,10 +24,12 @@ export class UpdateUserUsecase {
             throw new NotFoundError("user");
         }
 
-        const user = new User(
-            { name, email, password: doesUserExists.password },
-            id
-        );
+        const user = new User({
+            id,
+            name,
+            email,
+            password: doesUserExists.password,
+        });
         await this.userRepository.update(user, id);
     }
 }

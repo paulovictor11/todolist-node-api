@@ -12,14 +12,12 @@ export class PrismaUserRepository implements IUserRepository {
             return null;
         }
 
-        return new User(
-            {
-                name: user.name,
-                email: user.email,
-                password: user.password,
-            },
-            user.id
-        );
+        return new User({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            password: user.password,
+        });
     }
 
     async findById(id: number): Promise<User | null> {
@@ -31,14 +29,12 @@ export class PrismaUserRepository implements IUserRepository {
             return null;
         }
 
-        return new User(
-            {
-                name: user.name,
-                email: user.email,
-                password: user.password,
-            },
-            user.id
-        );
+        return new User({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            password: user.password,
+        });
     }
 
     async listAll(): Promise<User[]> {
@@ -49,14 +45,12 @@ export class PrismaUserRepository implements IUserRepository {
         });
         return users.map(
             (user) =>
-                new User(
-                    {
-                        name: user.name,
-                        email: user.email,
-                        password: user.password,
-                    },
-                    user.id
-                )
+                new User({
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    password: user.password,
+                })
         );
     }
 

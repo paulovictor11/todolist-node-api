@@ -1,4 +1,5 @@
 interface ITaskProps {
+    id?: number;
     title: string;
     projectId: number;
     assignedTo: number;
@@ -6,11 +7,10 @@ interface ITaskProps {
 }
 
 export class Task {
-    private props: ITaskProps;
-    private _id?: number;
+    constructor(private props: ITaskProps) {}
 
     get id(): number | null {
-        return this._id ?? null;
+        return this.props.id ?? null;
     }
 
     get title(): string {
@@ -27,10 +27,5 @@ export class Task {
 
     get completed(): boolean {
         return this.props.completed ?? false;
-    }
-
-    constructor(props: ITaskProps, id?: number) {
-        this.props = props;
-        this._id = id;
     }
 }
