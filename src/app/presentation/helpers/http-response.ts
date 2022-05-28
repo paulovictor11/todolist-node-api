@@ -11,9 +11,9 @@ export class HttpResponse {
         });
     }
 
-    unathorized() {
+    unathorized(message: string) {
         return this.response.status(401).json({
-            message: new Unathorized(),
+            message: new Unathorized(message),
         });
     }
 

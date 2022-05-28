@@ -13,4 +13,12 @@ export class TokenGenerator implements ITokenGenerator {
 
         return jwt.sign(id.toString(), process.env.JWT_SECRET!);
     }
+
+    async validate(token: string): Promise<void> {
+        if (!token) {
+            throw new MissingParamError("token");
+        }
+
+        await jwt.verify(token, process.env.JWT_SECRET!);
+    }
 }

@@ -18,6 +18,7 @@ import { DeleteUserController } from "./app/controllers/user/delete.controller";
 import { FindUserByIdController } from "./app/controllers/user/find-by-id.controller";
 import { ListAllUserscontroller } from "./app/controllers/user/list-all.controller";
 import { UpdateUserController } from "./app/controllers/user/update.controller";
+import { Authencicate } from "./app/middlewares/authenticate.middleware";
 
 export const routes = Router();
 
@@ -27,11 +28,12 @@ routes.post("/login", new LoginController().handle);
 // ! User routes
 routes
     .route("/users")
-    .get(new ListAllUserscontroller().handle)
+    .get(new Authencicate().handle, new ListAllUserscontroller().handle)
     .post(new CreateUserController().handle);
 
 routes
     .route("/user/:id")
+    .all(new Authencicate().handle)
     .get(new FindUserByIdController().handle)
     .put(new UpdateUserController().handle)
     .delete(new DeleteUserController().handle);
@@ -39,11 +41,13 @@ routes
 // ! Project routes
 routes
     .route("/projects")
+    .all(new Authencicate().handle)
     .get(new ListAllProjectsController().handle)
     .post(new CreateProjectController().handle);
 
 routes
     .route("/project/:id")
+    .all(new Authencicate().handle)
     .get(new FindProjectByIdController().handle)
     .put(new UpdateProjectController().handle)
     .delete(new DeleteProjectController().handle);
@@ -53,14 +57,24 @@ routes.post("/projects/title", new FindProjectByTitleController().handle);
 // ! Task routes
 routes
     .route("/tasks")
+    .all(new Authencicate().handle)
     .get(new ListAllTasksController().handle)
     .post(new CreateTaskController().handle);
 
 routes
     .route("/task/:id")
+    .all(new Authencicate().handle)
     .get(new FindTaskByIdController().handle)
     .put(new UpdateTaskController().handle)
     .delete(new DeleteTaskController().handle);
 
-routes.post("tasks/title", new FindTaskByTitleController().handle);
-routes.post("tasks/complete/:id", new CompleteTaskController().handle);
+routes.post(
+    "tasks/title",
+    new Authencicate().handle,
+    new FindTaskByTitleController().handle
+);
+routes.post(
+    "tasks/complete/:id",
+    new Authencicate().handle,
+    new CompleteTaskController().handle
+);
