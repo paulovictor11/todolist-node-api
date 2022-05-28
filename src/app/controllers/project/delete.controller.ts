@@ -1,20 +1,20 @@
 import { Request, Response } from "express";
 import { PrismaProjectRepository } from "../../../infra/database/prisma/repositories/prisma-project-repository";
 import { IControllerRepository } from "../../repositories/domain/controller-repository";
-import { CreateProjectUsecase } from "../../usecases/project/create.usecase";
+import { DeleteProjectUsecase } from "../../usecases/project/delete.usecase";
 
-export class CreateProjectController implements IControllerRepository {
+export class DeleteProjectController implements IControllerRepository {
     async handle(request: Request, response: Response): Promise<Response> {
         try {
-            const { title, description, userId } = request.body;
+            const { id } = request.params;
 
             const prismaProjectRepository = new PrismaProjectRepository();
-            const createProjectUsecase = new CreateProjectUsecase(
+            const deleteProjectUsecase = new DeleteProjectUsecase(
                 prismaProjectRepository
             );
 
-            await createProjectUsecase.execute({ title, description, userId });
-            return response.status(201).send();
+            await deleteProjectUsecase.execute(Number(id));
+            return response.send();
         } catch (err: any) {
             return response.status(400).json({
                 message: err.message ?? "Unexpected Error",

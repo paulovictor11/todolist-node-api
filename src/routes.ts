@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { LoginController } from "./app/controllers/auth/login.controller";
 import { CreateProjectController } from "./app/controllers/project/create.controller";
+import { DeleteProjectController } from "./app/controllers/project/delete.controller";
 import { FindProjectByIdController } from "./app/controllers/project/find-by-id.controller";
 import { ListAllProjectsController } from "./app/controllers/project/list-all.controller";
 import { UpdateProjectController } from "./app/controllers/project/update.controller";
@@ -36,6 +37,7 @@ routes
 routes
     .route("/project/:id")
     .get(new FindProjectByIdController().handle)
-    .put(new UpdateProjectController().handle);
+    .put(new UpdateProjectController().handle)
+    .delete(new DeleteProjectController().handle);
 
 // ! Task routes
