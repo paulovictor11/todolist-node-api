@@ -30,7 +30,7 @@ export class PrismaProjectRepository implements IProjectRepository {
         return new Project({
             id: project.id,
             title: project.title,
-            description: project.description,
+            description: project.description ?? undefined,
             userId: project.userId,
             tasks,
         });
@@ -62,7 +62,7 @@ export class PrismaProjectRepository implements IProjectRepository {
         return new Project({
             id: project.id,
             title: project.title,
-            description: project.description,
+            description: project.description ?? undefined,
             userId: project.userId,
             tasks,
         });
@@ -80,7 +80,7 @@ export class PrismaProjectRepository implements IProjectRepository {
                 new Project({
                     id: project.id,
                     title: project.title,
-                    description: project.description,
+                    description: project.description ?? undefined,
                     userId: project.userId,
                 })
         );

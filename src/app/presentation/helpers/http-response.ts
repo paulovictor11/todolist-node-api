@@ -1,19 +1,18 @@
 import { Response } from "express";
 import { ServerError } from "../errors/server-error";
-import { Unathorized } from "../errors/unathorized";
 
 export class HttpResponse {
     constructor(private response: Response) {}
 
     serverError() {
         return this.response.status(500).json({
-            message: new ServerError(),
+            message: "Internal Server Error",
         });
     }
 
     unathorized(message: string) {
         return this.response.status(401).json({
-            message: new Unathorized(message),
+            message: message,
         });
     }
 
@@ -24,7 +23,7 @@ export class HttpResponse {
     }
 
     created() {
-        return this.response.sendStatus(201);
+        return this.response.status(201).send();
     }
 
     ok(data?: any) {
