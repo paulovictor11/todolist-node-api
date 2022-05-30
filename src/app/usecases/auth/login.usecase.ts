@@ -38,7 +38,7 @@ export class LoginUsecase {
         }
 
         if (!(await this.encrypter.compare(password, user.password))) {
-            throw new Unathorized();
+            throw new Unathorized("Invalid password");
         }
 
         const token = await this.tokenGenerator.generate(user.id!);

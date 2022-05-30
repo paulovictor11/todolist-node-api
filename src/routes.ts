@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { LoginController } from "./app/controllers/auth/login.controller";
+import { UpdateUserPasswordController } from "./app/controllers/auth/update-password.controller";
 import { CreateProjectController } from "./app/controllers/project/create.controller";
 import { DeleteProjectController } from "./app/controllers/project/delete.controller";
 import { FindProjectByIdController } from "./app/controllers/project/find-by-id.controller";
@@ -24,6 +25,11 @@ export const routes = Router();
 
 // ! Authentication routes
 routes.post("/login", new LoginController().handle);
+routes.post(
+    "/update-password/:id",
+    new Authencicate().handle,
+    new UpdateUserPasswordController().handle
+);
 
 // ! User routes
 routes
