@@ -1,5 +1,4 @@
 import { Response } from "express";
-import { ServerError } from "../errors/server-error";
 
 export class HttpResponse {
     constructor(private response: Response) {}
