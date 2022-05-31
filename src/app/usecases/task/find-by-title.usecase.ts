@@ -1,4 +1,4 @@
-import { Task } from "../../../domain/task";
+import { ITask } from "../../../domain/task";
 import { NotFoundError } from "../../presentation/errors/not-found-error";
 import { ITaskRepository } from "../../repositories/domain/task-repository";
 import { MissingParamError } from "../../utils/errors/missing-param-error";
@@ -6,7 +6,7 @@ import { MissingParamError } from "../../utils/errors/missing-param-error";
 export class FindTaskByTitleUsecase {
     constructor(private taskRepository: ITaskRepository) {}
 
-    async execute(title: string): Promise<Task> {
+    async execute(title: string): Promise<ITask> {
         if (!title) {
             throw new MissingParamError("title");
         }
@@ -16,6 +16,6 @@ export class FindTaskByTitleUsecase {
             throw new NotFoundError("task");
         }
 
-        return doesTaskExists;
+        return doesTaskExists.toJson();
     }
 }

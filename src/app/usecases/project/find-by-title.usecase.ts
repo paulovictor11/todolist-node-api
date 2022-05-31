@@ -1,4 +1,4 @@
-import { Project } from "../../../domain/project";
+import { IProject } from "../../../domain/project";
 import { NotFoundError } from "../../presentation/errors/not-found-error";
 import { IProjectRepository } from "../../repositories/domain/project-repository";
 import { MissingParamError } from "../../utils/errors/missing-param-error";
@@ -6,7 +6,7 @@ import { MissingParamError } from "../../utils/errors/missing-param-error";
 export class FindProjectByTitleUsecase {
     constructor(private projectRepository: IProjectRepository) {}
 
-    async execute(title: string): Promise<Project> {
+    async execute(title: string): Promise<IProject> {
         if (!title) {
             throw new MissingParamError("title");
         }
@@ -18,6 +18,6 @@ export class FindProjectByTitleUsecase {
             throw new NotFoundError("project");
         }
 
-        return doesProjectExists;
+        return doesProjectExists.toJson(true);
     }
 }

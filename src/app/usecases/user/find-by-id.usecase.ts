@@ -1,4 +1,4 @@
-import { User } from "../../../domain/user";
+import { IUser } from "../../../domain/user";
 import { NotFoundError } from "../../presentation/errors/not-found-error";
 import { IUserRepository } from "../../repositories/domain/user-repository";
 import { MissingParamError } from "../../utils/errors/missing-param-error";
@@ -6,7 +6,7 @@ import { MissingParamError } from "../../utils/errors/missing-param-error";
 export class FindUserByIdUsecase {
     constructor(private userRepository: IUserRepository) {}
 
-    async execute(id: number): Promise<User> {
+    async execute(id: number): Promise<IUser> {
         if (!id) {
             throw new MissingParamError("user id");
         }
@@ -16,6 +16,6 @@ export class FindUserByIdUsecase {
             throw new NotFoundError("user");
         }
 
-        return user;
+        return user.toJson();
     }
 }

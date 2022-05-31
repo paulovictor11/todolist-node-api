@@ -8,6 +8,13 @@ interface IProjectProps {
     tasks?: Task[];
 }
 
+export interface IProject {
+    id: number;
+    title: string;
+    description?: string;
+    userId: number;
+    tasks?: Task[];
+}
 export class Project {
     constructor(private props: IProjectProps) {}
 
@@ -29,5 +36,20 @@ export class Project {
 
     get tasks(): Task[] {
         return this.props.tasks ?? [];
+    }
+
+    toJson(withTasks = false): IProject {
+        const project = {
+            id: this.id,
+            title: this.title,
+            description: this.description,
+            userId: this.userId,
+        } as IProject;
+
+        if (withTasks) {
+            project.tasks = this.tasks;
+        }
+
+        return project;
     }
 }
