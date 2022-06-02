@@ -58,5 +58,6 @@ describe("Update user password usecase", () => {
         const promise = sut.execute(userSpy.password, userSpy.id);
 
         expect(promise).resolves.not.toThrow();
+        expect(await promise).toBeUndefined();
     });
 });
