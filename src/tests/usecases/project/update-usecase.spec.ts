@@ -23,7 +23,7 @@ const projectSpy = {
     task: [],
 };
 
-describe("Update project", () => {
+describe("Update project usecase", () => {
     it("should throw an error when no project id is provided", async () => {
         const { sut } = makeSut();
         const promise = sut.execute(projectSpy, Number(""));

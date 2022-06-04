@@ -23,7 +23,7 @@ const projectSpy = {
     task: [],
 };
 
-describe("Find project by id", () => {
+describe("Find project by id usecase", () => {
     it("should throw an error when no project id is provided", async () => {
         const { sut } = makeSut();
         const promise = sut.execute(Number(""));
