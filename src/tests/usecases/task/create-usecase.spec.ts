@@ -1,7 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { CreateTaskUsecase } from "../../../app/usecases/task/create.usecase";
 import { MissingParamError } from "../../../app/utils/errors/missing-param-error";
-import { Task } from "../../../domain/task";
 import { InMemoryTaskRepository } from "../../repositories/inMemoryTaskRepository";
 
 const makeSut = () => {
