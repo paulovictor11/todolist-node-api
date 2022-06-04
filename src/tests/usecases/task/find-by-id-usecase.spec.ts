@@ -47,5 +47,7 @@ describe("Find task by id usecase", () => {
 
         expect(promise).resolves.not.toThrow();
         expect(await promise).toStrictEqual(task.toJson());
+        expect((await promise).id).toBeTruthy();
+        expect((await promise).completed).toBeTruthy();
     });
 });

@@ -47,5 +47,7 @@ describe("Find project by id usecase", () => {
 
         expect(promise).resolves.not.toThrow();
         expect(await promise).toStrictEqual(project.toJson(true));
+        expect((await promise).id).toBeTruthy();
+        expect((await promise).description).toBeTruthy();
     });
 });
