@@ -20,7 +20,7 @@ const taskSpy = {
     title: faker.lorem.sentence(),
     projectId: faker.datatype.number(),
     assignedTo: faker.datatype.number(),
-    completed: faker.datatype.boolean(),
+    completed: true,
 };
 
 describe("Find task by id usecase", () => {
